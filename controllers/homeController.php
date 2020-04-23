@@ -6,6 +6,9 @@ class homeController extends controller {
     }
 
     public function index() {
+
+        header('Location:'.BASE.'painel');
+        exit;
        
         $siteHandler = new SiteHandler();
         $site = $siteHandler->getSite();
