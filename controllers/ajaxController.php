@@ -30,24 +30,21 @@ class ajaxController extends controller {
         
         $month = date('m');
         $year = date('Y');
-        $page = 1;
-        $limit = 20;
+
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $content = file_get_contents("php://input");
             $array = json_decode($content, true);
             $month = $array['month'];
             $year = $array['year'];
-            $page = $array['page'];
-            $limit = $array['limit'];
+            
         }
 
         $moviment = new MovementHandler(); 
         $total = $moviment->getTotal($month, $year);
-        $paginas = ceil($total/$limit);
+        /*$paginas = ceil($total/$limit);
         $paginaAtual = $page;
-        
-        $offset = ($paginaAtual * $limit) - $limit;
+        $offset = ($paginaAtual * $limit) - $limit;*/
         $moviments = $moviment->getList($month, $year);
         $desccontTotal = $moviment->getTotalDesccount($month, $year);
         $desccontTotalPaid = $moviment->getTotalDesccount($month, $year,2);
@@ -74,8 +71,6 @@ class ajaxController extends controller {
 
         $this->loadViewInPainel('listMoviment', [
             'moviments' => $moviments,
-            'paginas' => $paginas,
-            'paginaAtual' => $paginaAtual,
             'month' => $month,
             'year' => $year,
             'currentMonth' => $currentMonth,
