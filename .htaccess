@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /aleEvolucoes/receita_despesa/index.php?q=$1 [QSA,L]
+#RewriteRule ^(.*)$ /projeto/index.php?q=$1 [QSA,L]
+#RewriteRule ^(.*)$ /index.php?q=$1 [QSA,L]
