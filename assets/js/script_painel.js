@@ -17,10 +17,8 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
            });   
     return false;    
     });
-
-    
     function updateLoadMoviments(obj) {
-        console.log(obj.value);
+        alert('Foi!');
     }
     loadMoviments();
     async function loadMoviments() {
@@ -38,15 +36,10 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
             };
 
         moviments = document.querySelector('#moviments');
-        /*moviments.innerHTML = await fetch(`${BASE}ajax/listMoviment`, myInit)
-            .then((r)=>r.text())
-            .catch(error => error);*/
         await fetch(`${BASE}ajax/listMoviment`, myInit)
             .then((r)=>r.text())
             .then((r)=>{
-                moviments.innerHTML = r;
-                
-                
+                moviments.innerHTML = r; 
             })
             .catch(error => {
                 moviments.innerHTML = error

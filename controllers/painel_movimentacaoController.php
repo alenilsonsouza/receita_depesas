@@ -18,10 +18,19 @@ class painel_movimentacaoController extends controller {
 
         $siteHandler = new SiteHandler();
         $site = $siteHandler->getSite();
+
+        $date = new Date();
+        $m = [];
+        for($q=1;$q<=12;$q++) {
+            $m[] = $date->getMonth($q);
+        }
+
+        $months = $m;
         
         $this->loadTemplateInPainel('moviment',[
             'page' => 'moviment',
             'site' => $site,
+            'months' => $months,
             'loggedUser' => $this->loggedUser
         ]);
     }
