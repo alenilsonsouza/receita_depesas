@@ -1,7 +1,6 @@
-# Fioravante Merten
-Projeto para Agência Órbita
+# Sistema de Receita e Despesas
 
-Estrutura em MVC - WebSite, CMS com Materialize
+Estrutura em MVC - CMS com Bootstrap
 
 ## No seu git local favor utilizar o comando de não acompanhamento para os seguintes arquivos:
 
