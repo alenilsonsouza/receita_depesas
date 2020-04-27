@@ -65,9 +65,4 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
 
     //Executa a função para listar a movimentação 
     loadMoviments(month, year);
-
-    
-
-
-    
 })
