@@ -116,6 +116,35 @@ class MovementHandler extends model {
         return $total;
     }
 
+    public function delById($id) {
+        $sql = "DELETE FROM movement WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id',$id);
+        $sql->execute();
+    }
+
+    public function getById($id) {
+        $array = [];
+        $sql = "SELECT * FROM movement WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        if($sql->rowCount()>0) {
+            $item = $sql->fetch();
+            $newMovement = new Movement();
+            $newMovement->setId($item['id']);
+            $newMovement->setName($item['name']);
+            $newMovement->setPrice($item['price']);
+            $newMovement->setDesccount($item['desccount']);
+            $newMovement->setAddition($item['addition']);
+            $newMovement->setType($item['type']);
+            $newMovement->setDueDate($item['due_date']);
+            $newMovement->setPaid($item['paid']);
+            $array = $newMovement;
+
+        }
+    }
+
     private function getTextNamePaid($paid) {
 
         switch($paid) {

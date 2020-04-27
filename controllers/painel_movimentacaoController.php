@@ -38,8 +38,15 @@ class painel_movimentacaoController extends controller {
         $years = $a;
 
         //Pega o mes e ano atual
-        $month = date('m');
-        $year = date('Y');
+        if(!isset($_SESSION['date'])) {
+            $date = [
+                'month' => date('m'),
+                'year' => date('Y')
+            ];
+            $_SESSION['date'] = $date;
+        }
+        $month = $_SESSION['date']['month'];
+        $year = $_SESSION['date']['year'];
 
         $this->loadTemplateInPainel('moviment',[
             'page' => 'moviment',
@@ -50,5 +57,47 @@ class painel_movimentacaoController extends controller {
             'year' => $year,
             'loggedUser' => $this->loggedUser
         ]);
+    }
+
+    public function storageAddAction() {
+        $name = filter_input(INPUT_POST, 'name');
+        $price = filter_input(INPUT_POST, 'price');
+        $desccount = filter_input(INPUT_POST, 'desccount');
+        $addition = filter_input(INPUT_POST, 'addition');
+        $due_date = filter_input(INPUT_POST, 'due_date');
+        $type = filter_input(INPUT_POST, 'type');
+
+        if($name && $price) {
+
+            $newMoviment = new Movement();
+            $price = $newMoviment->parseFloat($price);
+            $desccount = $newMoviment->parseFloat($desccount);
+            $addition = $newMoviment->parseFloat($addition);
+            $due_date = explode('/',$due_date);
+            $date = $due_date[2].'-'.$due_date[1].'-'.$due_date[0]; 
+
+            $newMoviment->setInstallmentId(0);
+            $newMoviment->setName($name);
+            $newMoviment->setPrice($price);
+            $newMoviment->setDesccount($desccount);
+            $newMoviment->setAddition($addition);
+            $newMoviment->setDueDate($date);
+            $newMoviment->setType($type);
+
+            $movimentHandler = new MovementHandler();
+            $movimentHandler->insert($newMoviment);
+
+        }
+
+        header('Location:'.BASE.'painel_movimentacao');
+        exit;
+    }
+
+    public function delAction($id) {
+
+        $movimentHandler = new MovementHandler();
+        $movimentHandler->delById($id);
+        header('Location:'.BASE.'painel_movimentacao');
+        exit;
     }
 }

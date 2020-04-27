@@ -20,14 +20,14 @@ class Movement {
     public function setName(string $name) {
         $this->name = trim($name);
     }
-    public function setPrice(float $price) {
-        $this->price = $price;
+    public function setPrice($price) {
+        $this->price = $this->parseFloat($price);
     }
-    public function setDesccount(float $desccount) {
-        $this->desccount = $desccount;
+    public function setDesccount($desccount) {
+        $this->desccount = $this->parseFloat($desccount);
     }
-    public function setAddition(float $addition) {
-        $this->addition = $addition;
+    public function setAddition($addition) {
+        $this->addition = $this->parseFloat($addition);
     }
     public function setType(string $type) {
         $this->type = trim($type);
@@ -71,5 +71,10 @@ class Movement {
     }
     public function getNamePaid() {
         return $this->namePaid;
+    }
+
+    public function parseFloat($val) {
+        $val = str_replace(',','.',$val);
+        return $val;
     }
 }

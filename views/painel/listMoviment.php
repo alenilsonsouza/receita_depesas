@@ -54,7 +54,7 @@
         <tbody>
             <?php $n = 1;?>
             <?php foreach($moviments as $moviment):?>
-            <tr>
+            <tr class="<?=($moviment->getType() == 'credit')?'bg-success text-white':'bg-danger text-white';?>">
                 <th scope="row"><?=$n;?></th>
                 <td><?=$moviment->getName();?></td>
                 <td><?=date('d/m/Y', strtotime($moviment->getDueDate()));?></td>
@@ -65,8 +65,8 @@
                 <td><?=number_format($moviment->getPrice()-$moviment->getDesccount()+$moviment->getAddition(),2,',','');?></td>
                 <td><?php echo $moviment->getNamePaid();?></td>
                 <td>
-                    <a href="" class="btn btn-primary">Editar</a>
-                    <a href="" class="btn btn-primary">Excluir</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" date-id="<?=$moviment->getId();?>">Editar</a>
+                    <a href="<?=BASE;?>painel_movimentacao/delAction/<?=$moviment->getId();?>" class="btn btn-primary" onclick="return confirm('Deseja realemente excluir?');">Excluir</a>
                 </td>
             </tr>
             <?php $n++;?>
@@ -74,4 +74,25 @@
         </tbody>
         </table>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

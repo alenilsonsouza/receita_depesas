@@ -37,6 +37,10 @@ class ajaxController extends controller {
             $array = json_decode($content, true);
             $month = $array['month'];
             $year = $array['year'];
+            $_SESSION['date'] = [
+                'month' => $month,
+                'year' => $year
+            ];
             
         }
 
