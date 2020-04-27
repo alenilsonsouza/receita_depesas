@@ -43,26 +43,27 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
             });
     }
 
-    
+    function updateDate(){
+        let elMonth = document.querySelector('#month');
+        let elYear = document.querySelector('#year');
+        let month = elMonth.options[elMonth.selectedIndex].value;
+        let year = elYear.options[elYear.selectedIndex].value;
+        loadMoviments(month, year);
+    }
+
+    //Pega os elementos mes e ano
     let elMonth = document.querySelector('#month');
     let elYear = document.querySelector('#year');
 
+    //Pega o item selecionado mes e ano
     let month = elMonth.options[elMonth.selectedIndex].value;
     let year = elYear.options[elYear.selectedIndex].value;
 
-    elMonth.addEventListener('change', function(){
-        let month = elMonth.options[elMonth.selectedIndex].value;
-        let year = elYear.options[elYear.selectedIndex].value;
-        console.log(`${month} - ${year}`);
-        loadMoviments(month, year);
-    });
+    //Pega o item selecionado mes e ano
+    elMonth.addEventListener('change', function(){updateDate()});
+    elYear.addEventListener('change', function(){updateDate()});
 
-    elYear.addEventListener('change', function(){
-        let month = elMonth.options[elMonth.selectedIndex].value;
-        let year = elYear.options[elYear.selectedIndex].value;
-        console.log(`${month} - ${year}`);
-        loadMoviments(month, year);
-    });
+    //Executa a função para listar a movimentação 
     loadMoviments(month, year);
 
     
