@@ -17,11 +17,8 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
            });   
     return false;    
     });
-    function updateLoadMoviments(obj) {
-        alert('Foi!');
-    }
-    loadMoviments();
-    async function loadMoviments() {
+    
+    async function loadMoviments(month, year) {
         let myHeaders = new Headers();
         let myInit = { 
                 method: 'POST',
@@ -29,8 +26,8 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                 mode: 'cors',
                 cache: 'default',
                 body: JSON.stringify({
-                    month: 4,
-                    year: 2020,
+                    month,
+                    year,
                 })
                 
             };
@@ -45,4 +42,31 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                 moviments.innerHTML = error
             });
     }
+
+    
+    let elMonth = document.querySelector('#month');
+    let elYear = document.querySelector('#year');
+
+    let month = elMonth.options[elMonth.selectedIndex].value;
+    let year = elYear.options[elYear.selectedIndex].value;
+
+    elMonth.addEventListener('change', function(){
+        let month = elMonth.options[elMonth.selectedIndex].value;
+        let year = elYear.options[elYear.selectedIndex].value;
+        console.log(`${month} - ${year}`);
+        loadMoviments(month, year);
+    });
+
+    elYear.addEventListener('change', function(){
+        let month = elMonth.options[elMonth.selectedIndex].value;
+        let year = elYear.options[elYear.selectedIndex].value;
+        console.log(`${month} - ${year}`);
+        loadMoviments(month, year);
+    });
+    loadMoviments(month, year);
+
+    
+
+
+    
 })
