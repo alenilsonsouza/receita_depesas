@@ -44,9 +44,8 @@ class MovementHandler extends model {
                 $newMovement->setDesccount($item['desccount']);
                 $newMovement->setAddition($item['addition']);
                 $newMovement->setType($item['type']);
-                $newMovement->setPaid($item['paid']);
                 $newMovement->setDueDate($item['due_date']);
-                $newMovement->setNamePaid($this->getTextNamePaid($item['paid']));
+                $newMovement->setPaymentDate($item['payment_date']);
                 $array[] = $newMovement;
             }
         }
@@ -65,15 +64,12 @@ class MovementHandler extends model {
 
     public function getTotalDesccount($month, $year, $c = '') {
         $sql = "SELECT SUM(desccount) as t FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y";
-        if(!empty($c)) {
-            $sql .= " AND paid = :c";
+        if($c == 1) {
+            $sql .= " AND payment_date > 0";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
         $sql->bindValue(':y', $year);
-        if(!empty($c)){
-            $sql->bindValue(':c',$c);
-        }
         $sql->execute();
         $sql = $sql->fetch();
         return $sql['t'];
@@ -81,15 +77,12 @@ class MovementHandler extends model {
 
     public function getTotalAddition($month, $year, $c = '') {
         $sql = "SELECT SUM(addition) as t FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y";
-        if(!empty($c)) {
-            $sql .= " AND paid = :c";
+        if($c == 1) {
+            $sql .= " AND payment_date > 0";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
         $sql->bindValue(':y', $year);
-        if(!empty($c)){
-            $sql->bindValue(':c',$c);
-        }
         $sql->execute();
         $sql = $sql->fetch();
         return $sql['t'];
@@ -97,15 +90,12 @@ class MovementHandler extends model {
 
     public function getTotalExpenses($month, $year, $c = '') {
         $sql = "SELECT SUM(price) as p, SUM(desccount) as d, SUM(addition) as a FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y AND type = 'debit'";
-        if(!empty($c)) {
-            $sql .= " AND paid = :c";
+        if($c == 1) {
+            $sql .= " AND payment_date > 0";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
         $sql->bindValue(':y', $year);
-        if(!empty($c)){
-            $sql->bindValue(':c',$c);
-        }
         $sql->execute();
         $sql = $sql->fetch();
         $total = floatval($sql['p']) - floatval($sql['d']) + floatval($sql['a']);
@@ -114,15 +104,12 @@ class MovementHandler extends model {
 
     public function getTotalRecipes($month, $year, $c = '') {
         $sql = "SELECT SUM(price) as p, SUM(desccount) as d, SUM(addition) as a FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y AND type = 'credit'";
-        if(!empty($c)) {
-            $sql .= " AND paid = :c";
+        if($c == 1) {
+            $sql .= " AND payment_date > 0";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
         $sql->bindValue(':y', $year);
-        if(!empty($c)){
-            $sql->bindValue(':c',$c);
-        }
         $sql->execute();
         $sql = $sql->fetch();
         $total = floatval($sql['p']) - floatval($sql['d']) + floatval($sql['a']);
@@ -152,7 +139,6 @@ class MovementHandler extends model {
             $newMovement->setAddition($item['addition']);
             $newMovement->setType($item['type']);
             $newMovement->setDueDate($item['due_date']);
-            $newMovement->setPaid($item['paid']);
             $array = $newMovement;
 
         }

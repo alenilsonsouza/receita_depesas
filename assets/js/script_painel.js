@@ -42,6 +42,11 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                         editMoviment(id);
                     });
                 }
+                let el = document.querySelectorAll('.bt-consolidar'), n;
+                for(n=0;n<el.length;n++) {
+                    let id = el[n].getAttribute('data-id');
+                    consolidar(id);
+                }
                 
             })
             .catch(error => {
@@ -62,6 +67,35 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
             .then((r)=>r.text())
             .then((r)=>{
                 document.querySelector('.modal-body').innerHTML = r; 
+                //Máscara
+                mask();
+            })
+            .catch(error => {   
+                document.querySelector('.modal-body').innerHTML = error
+            });
+       
+    }
+
+    function consolidar(id) {
+        let myInit = { 
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify({
+                id,
+            })
+        };
+        fetch(`${BASE}ajax/consolidar`, myInit)
+            .then((r)=>r.text())
+            .then((r)=>{
+                document.querySelector('.modal-body').innerHTML = r; 
+                //Máscara
+                let data = document.querySelectorAll('.data'), d;
+                for(d=0;d<data.length;d++) {
+                    IMask(data[d],{
+                        mask: '00/00/0000'
+                    });
+                }
             })
             .catch(error => {   
                 document.querySelector('.modal-body').innerHTML = error
@@ -91,4 +125,31 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
 
     //Executa a função para listar a movimentação 
     loadMoviments(month, year);
+
+    function mask() {
+        let valor = document.querySelectorAll('.valor'), v;
+        let data = document.querySelectorAll('.data'), d;
+        //Opções de formato de valores em reais
+        let options = {
+            mask:Number,
+            scale: 2,  // digits after point, 0 for integers
+            signed: false,  // disallow negative
+            thousandsSeparator: '',  // any single char
+            padFractionalZeros: true,  // if true, then pads zeros at end to the length of scale
+            normalizeZeros: true,  // appends or removes zeros at ends
+            radix: ',',  // fractional delimiter
+            mapToRadix: ['.']  // symbols to process as radix
+        }
+    
+        for(v=0;v<valor.length;v++) {
+            IMask(valor[v], options);
+        }
+    
+        for(d=0;d<data.length;d++) {
+            IMask(data[d],{
+                mask: '00/00/0000'
+            });
+        }
+    }
+    mask();
 })

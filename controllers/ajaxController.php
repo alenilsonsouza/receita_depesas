@@ -51,17 +51,17 @@ class ajaxController extends controller {
         $offset = ($paginaAtual * $limit) - $limit;*/
         $moviments = $moviment->getList($month, $year);
         $desccontTotal = $moviment->getTotalDesccount($month, $year);
-        $desccontTotalPaid = $moviment->getTotalDesccount($month, $year,2);
-        $desccontTotalNoPaid = $moviment->getTotalDesccount($month, $year,1);
+        $desccontTotalPaid = $moviment->getTotalDesccount($month, $year,1);
+        $desccontTotalNoPaid = $moviment->getTotalDesccount($month, $year,0);
         $additionTotal = $moviment->getTotalAddition($month, $year);
-        $additionTotalPaid = $moviment->getTotalAddition($month, $year,2);
-        $additionTotalNoPaid = $moviment->getTotalAddition($month, $year,1);
+        $additionTotalPaid = $moviment->getTotalAddition($month, $year,1);
+        $additionTotalNoPaid = $moviment->getTotalAddition($month, $year,0);
         $recipesTotal = $moviment->getTotalRecipes($month, $year);
-        $recipesTotalPaid = $moviment->getTotalRecipes($month, $year,2);
-        $recipesTotalNoPaid = $moviment->getTotalRecipes($month, $year,1);
+        $recipesTotalPaid = $moviment->getTotalRecipes($month, $year,1);
+        $recipesTotalNoPaid = $moviment->getTotalRecipes($month, $year,0);
         $expensesTotal = $moviment->getTotalExpenses($month, $year);
-        $expensesTotalPaid = $moviment->getTotalExpenses($month, $year,2);
-        $expensesTotalNoPaid = $moviment->getTotalExpenses($month, $year,1);
+        $expensesTotalPaid = $moviment->getTotalExpenses($month, $year,1);
+        $expensesTotalNoPaid = $moviment->getTotalExpenses($month, $year,0);
 
         $date = new Date();
         $currentMonth = $date->getMonth($month);
@@ -107,6 +107,23 @@ class ajaxController extends controller {
 
         $this->loadViewInPainel('moviment_edit',[
             'moviment' => $moviment
+        ]);
+    }
+
+    public function consolidar() {
+
+        $id = 0;
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $content = file_get_contents("php://input");
+            $array = json_decode($content, true);
+            $id = $array['id'];   
+        }
+
+        $moviments = new MovementHandler();
+        $moviment = $moviments->getById($id);
+
+        $this->loadViewInPainel('moviment_payment',[
+            'moviment'=>$moviment
         ]);
     }
 

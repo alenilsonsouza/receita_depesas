@@ -10,6 +10,7 @@ class Movement {
     private $due_date;
     private $paid;
     private $namePaid;
+    private $payment_date;
 
     public function setId(int $id) {
         $this->id = $id;
@@ -37,6 +38,9 @@ class Movement {
     }
     public function setPaid(int $paid) {
         $this->paid = $paid;
+    }
+    public function setPaymentDate($date) {
+        $this->payment_date = $date;
     }
     public function setNamePaid($paid) {
         $this->namePaid = $paid;
@@ -68,6 +72,9 @@ class Movement {
     }
     public function getPaid() {
         return $this->paid;
+    }
+    public function getPaymentDate() {
+        return $this->payment_date;
     }
     public function getNamePaid() {
         return $this->namePaid;

@@ -63,7 +63,13 @@
                 <td><?=number_format($moviment->getDesccount(),2,',','');?></td>
                 <td><?=number_format($moviment->getAddition(),2,',','');?></td>
                 <td><?=number_format($moviment->getPrice()-$moviment->getDesccount()+$moviment->getAddition(),2,',','');?></td>
-                <td><?php echo $moviment->getNamePaid();?></td>
+                <td>
+                    <?php if(!empty($moviment->getPaymentDate())):?>
+                        <button class="btn btn-secondary">Pago</button>
+                    <?php else:?>
+                        <a href="javascript:;" class="btn btn-primary bt-consolidar" data-toggle="modal"  data-target="#exampleModal" data-id="<?=$moviment->getId();?>">Consolidar</a>
+                    <?php endif;?>
+                </td>
                 <td>
                     <a href="" class="btn btn-primary bt-edit" data-toggle="modal"  data-target="#exampleModal" data-id="<?=$moviment->getId();?>">Editar</a>
                     <a href="<?=BASE;?>painel_movimentacao/delAction/<?=$moviment->getId();?>" class="btn btn-primary" onclick="return confirm('Deseja realemente excluir?');">Excluir</a>
@@ -81,7 +87,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -91,7 +97,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

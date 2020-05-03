@@ -12,19 +12,19 @@
             </div>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="inputPassword2" class="sr-only">Valor</label>
-                <input type="tel" class="form-control" id="price" placeholder="Valor" name="price" required>
+                <input type="tel" class="form-control valor" id="price" placeholder="Valor" name="price" required>
             </div>
             <div class="form-group mb-2">
                 <label for="inputPassword2" class="sr-only">Desconto</label>
-                <input type="tel" class="form-control" id="desccount" placeholder="Desconto" name="desccount">
+                <input type="tel" class="form-control valor" id="desccount" placeholder="Desconto" name="desccount">
             </div>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="inputPassword2" class="sr-only">Acréscimo</label>
-                <input type="tel" class="form-control" id="addition" placeholder="Acréscimo" name="addition">
+                <input type="tel" class="form-control valor" id="addition" placeholder="Acréscimo" name="addition">
             </div>
             <div class="form-group mb-2">
                 <label for="inputPassword2" class="sr-only">Vencimento</label>
-                <input type="tel" class="form-control" id="due_date" placeholder="Vencimento" name="due_date" required>
+                <input type="tel" class="form-control data" id="due_date" placeholder="Vencimento" name="due_date" required>
             </div>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="inputPassword2" class="sr-only">Acréscimo</label>
@@ -61,31 +61,4 @@
     </div>
 </div>
 <div id="moviments"></div>
-<script src="https://unpkg.com/imask"></script>
-<script type="text/javascript">
-    let price = document.querySelector('#price');
-    let desccount = document.querySelector('#desccount');
-    let addition = document.querySelector('#addition');
-    let due_date = document.querySelector('#due_date');
 
-    //Opções de formato de valores em reais
-    let options = {
-        mask:Number,
-        scale: 2,  // digits after point, 0 for integers
-        signed: false,  // disallow negative
-        thousandsSeparator: '',  // any single char
-        padFractionalZeros: false,  // if true, then pads zeros at end to the length of scale
-        normalizeZeros: false,  // appends or removes zeros at ends
-        radix: ',',  // fractional delimiter
-        mapToRadix: ['.']  // symbols to process as radix
-    }
-
-    IMask(price, options);
-    IMask(desccount, options);
-    IMask(addition, options);
-    IMask(due_date, {
-        mask:'00/00/0000'
-    });
-
-    
-</script>
