@@ -43,9 +43,12 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                     });
                 }
                 let el = document.querySelectorAll('.bt-consolidar'), n;
+                console.log(el);
                 for(n=0;n<el.length;n++) {
-                    let id = el[n].getAttribute('data-id');
-                    consolidar(id);
+                    el[n].addEventListener('click', function(){
+                        let id = this.getAttribute('data-id');
+                        consolidar(id);
+                    });   
                 }
                 
             })
@@ -54,7 +57,7 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
             });
     }
 
-    function editMoviment(id) {
+    async function editMoviment(id) {
         let myInit = { 
             method: 'POST',
             mode: 'cors',
@@ -63,7 +66,7 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                 id,
             })
         };
-        fetch(`${BASE}ajax/editMoviment`, myInit)
+        await fetch(`${BASE}ajax/editMoviment`, myInit)
             .then((r)=>r.text())
             .then((r)=>{
                 document.querySelector('.modal-body').innerHTML = r; 
@@ -76,7 +79,7 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
        
     }
 
-    function consolidar(id) {
+    async function consolidar(id) {
         let myInit = { 
             method: 'POST',
             mode: 'cors',
@@ -85,7 +88,7 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                 id,
             })
         };
-        fetch(`${BASE}ajax/consolidar`, myInit)
+        await fetch(`${BASE}ajax/consolidar`, myInit)
             .then((r)=>r.text())
             .then((r)=>{
                 document.querySelector('.modal-body').innerHTML = r; 

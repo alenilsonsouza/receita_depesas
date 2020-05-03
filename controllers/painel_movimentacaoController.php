@@ -129,6 +129,23 @@ class painel_movimentacaoController extends controller {
         exit;
     }
 
+    public function storageConsolidar() {
+        $payment_date = filter_input(INPUT_POST, 'payment_date');
+        $id = filter_input(INPUT_POST, 'id');
+
+        if($payment_date && $id) {
+            $newMoviment = new Movement();
+            $newMoviment->setPaymentDate($payment_date);
+            $newMoviment->setId($id);
+
+            $movimentHandler = new MovementHandler();
+            $movimentHandler->consolidar($newMoviment);
+        }
+
+        header('Location:'.BASE.'painel_movimentacao');
+        exit;
+    }
+
     public function delAction($id) {
 
         $movimentHandler = new MovementHandler();

@@ -145,6 +145,14 @@ class MovementHandler extends model {
         return $array;
     }
 
+    public function consolidar($newMoviment){
+        $sql = "UPDATE movement SET payment_date = :payment_date WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':payment_date', $newMoviment->getPaymentDate());
+        $sql->bindValue(':id', $newMoviment->getId());
+        $sql->execute();
+    }
+
     private function getTextNamePaid($paid) {
 
         switch($paid) {
