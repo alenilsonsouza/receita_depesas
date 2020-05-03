@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Abr-2020 às 14:05
+-- Tempo de geração: 04-Maio-2020 às 01:51
 -- Versão do servidor: 10.4.11-MariaDB
--- versão do PHP: 7.4.3
+-- versão do PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -48,17 +47,17 @@ CREATE TABLE `movement` (
   `addition` float DEFAULT 0,
   `type` varchar(20) NOT NULL DEFAULT 'credit' COMMENT 'credit, debit',
   `due_date` date NOT NULL,
-  `paid` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 - não pago, 2 - pago'
+  `payment_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `movement`
 --
 
-INSERT INTO `movement` (`id`, `installment_id`, `name`, `price`, `desccount`, `addition`, `type`, `due_date`, `paid`) VALUES
-(1, 0, 'Conta de Luz', 98.5, 0, 2, 'debit', '2020-04-21', 2),
-(2, 0, 'Aluguel', 350, 5, 0, 'debit', '2020-04-20', 1),
-(3, 0, 'Netflix', 45.9, 0, 0, 'credit', '2020-04-20', 1);
+INSERT INTO `movement` (`id`, `installment_id`, `name`, `price`, `desccount`, `addition`, `type`, `due_date`, `payment_date`) VALUES
+(9, 0, 'Aluguel', 350, 0, 0, 'debit', '2020-05-10', NULL),
+(10, 0, 'Luz', 130, 0, 0, 'debit', '2020-05-07', '0000-00-00'),
+(11, 0, 'Cliente', 500, 0, 0, 'credit', '2020-05-01', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -103,7 +102,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `token`, `type`) VALUES
-(3, 'Alenilson Souza', 'alenilsonsouza@gmail.com', '$2y$10$sZsGwR1XOIZE2jJ9cMqFVuzUAmROL0eqR8TTz9NhAxX3UdKe4N7PK', '2020-04-11', '4ea2424dec6164424e385071741a3aca', 1),
+(3, 'Alenilson Souza', 'alenilsonsouza@gmail.com', '$2y$10$sZsGwR1XOIZE2jJ9cMqFVuzUAmROL0eqR8TTz9NhAxX3UdKe4N7PK', '2020-04-11', 'a2ada36e0cf8d13268a157065e0897fb', 1),
 (8, 'Ciclano', 'ciclano@gmail.com', '$2y$10$99Rm7at.Ur3B1fiqTNotY.x6GFkM7rpzBkpPb/sQjJ03QvYZ9KRua', '2020-04-11', '1defae2a8211431b4e96bd5700052559', 3),
 (9, 'Beltrano', 'beltrano@gmail.com', '$2y$10$bLgCW4Jiu0j1bWUQi8cjgePwhQmMhkQCnd6RAn7coR7jRh8MDP4t.', '2020-04-11', 'c5aadb2032ee8dcb7a49b4cd1c90791e', 2);
 
@@ -149,7 +148,7 @@ ALTER TABLE `installment`
 -- AUTO_INCREMENT de tabela `movement`
 --
 ALTER TABLE `movement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `site`
