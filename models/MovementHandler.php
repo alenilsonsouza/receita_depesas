@@ -28,7 +28,7 @@ class MovementHandler extends model {
 
     public function getList($month, $year) {
         $array = [];
-        $sql = "SELECT * FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y ORDER BY due_date DESC";
+        $sql = "SELECT * FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y ORDER BY due_date ASC";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
         $sql->bindValue(':y', $year);
@@ -65,7 +65,7 @@ class MovementHandler extends model {
     public function getTotalDesccount($month, $year, $c = '') {
         $sql = "SELECT SUM(desccount) as t FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y";
         if($c == 1) {
-            $sql .= " AND payment_date > 0";
+            $sql .= " AND payment_date IS NOT NULL";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
@@ -78,7 +78,7 @@ class MovementHandler extends model {
     public function getTotalAddition($month, $year, $c = '') {
         $sql = "SELECT SUM(addition) as t FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y";
         if($c == 1) {
-            $sql .= " AND payment_date > 0";
+            $sql .= " AND payment_date  IS NOT NULL";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
@@ -91,7 +91,7 @@ class MovementHandler extends model {
     public function getTotalExpenses($month, $year, $c = '') {
         $sql = "SELECT SUM(price) as p, SUM(desccount) as d, SUM(addition) as a FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y AND type = 'debit'";
         if($c == 1) {
-            $sql .= " AND payment_date > 0";
+            $sql .= " AND payment_date  IS NOT NULL";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
@@ -105,7 +105,7 @@ class MovementHandler extends model {
     public function getTotalRecipes($month, $year, $c = '') {
         $sql = "SELECT SUM(price) as p, SUM(desccount) as d, SUM(addition) as a FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y AND type = 'credit'";
         if($c == 1) {
-            $sql .= " AND payment_date > 0";
+            $sql .= " AND payment_date  IS NOT NULL";
         }
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);

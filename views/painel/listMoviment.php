@@ -54,7 +54,16 @@
         <tbody>
             <?php $n = 1;?>
             <?php foreach($moviments as $moviment):?>
-            <tr class="<?=($moviment->getType() == 'credit')?'bg-success text-white':'bg-danger text-white';?>">
+                <?php
+                    if(!empty($moviment->getPaymentDate())){
+                        $css = 'bg-success text-white';
+                    }elseif($moviment->getType()){
+                        $css = 'bg-primary text-white';
+                    }else{
+                        $css = 'bg-danger text-white';
+                    }
+                ?>
+            <tr class="<?=$css?>">
                 <th scope="row"><?=$n;?></th>
                 <td><?=$moviment->getName();?></td>
                 <td><?=date('d/m/Y', strtotime($moviment->getDueDate()));?></td>

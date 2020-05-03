@@ -8,7 +8,7 @@
         <form class="form-inline" action="<?=BASE;?>painel_movimentacao/storageConsolidar" method="post">
             <div class="form-group mb-2">
                 <label for="inputPassword2" class="sr-only">Data Pagamento</label>
-                <input type="tel" class="form-control data" id="payment_date" placeholder="Data Pagamento" name="payment_date" required>
+                <input type="tel" class="form-control data" id="payment_date" placeholder="Data Pagamento" name="payment_date" required value="<?=date('d/m/Y');?>">
             </div>
             <input type="hidden" value="<?=$moviment->getId();?>" name="id">
             <button type="submit" class="btn btn-primary mb-2">Confirmar</button>
