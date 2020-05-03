@@ -13,6 +13,19 @@ class MovementHandler extends model {
         $sql->execute();
     }
 
+    public function update($movement) {
+        $sql = "UPDATE movement SET name = :name, price = :price, desccount = :desccount, addition = :addition, type = :type, due_date = :due_date WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue('name', $movement->getName());
+        $sql->bindValue('price', $movement->getPrice());
+        $sql->bindValue('desccount', $movement->getDesccount());
+        $sql->bindValue('addition', $movement->getAddition());
+        $sql->bindValue('type', $movement->getType());
+        $sql->bindValue('due_date', $movement->getDueDate());
+        $sql->bindValue(':id', $movement->getId());
+        $sql->execute();
+    }
+
     public function getList($month, $year) {
         $array = [];
         $sql = "SELECT * FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y ORDER BY due_date DESC";
@@ -143,6 +156,7 @@ class MovementHandler extends model {
             $array = $newMovement;
 
         }
+        return $array;
     }
 
     private function getTextNamePaid($paid) {

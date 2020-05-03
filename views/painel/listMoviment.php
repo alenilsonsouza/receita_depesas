@@ -65,7 +65,7 @@
                 <td><?=number_format($moviment->getPrice()-$moviment->getDesccount()+$moviment->getAddition(),2,',','');?></td>
                 <td><?php echo $moviment->getNamePaid();?></td>
                 <td>
-                    <a href="" class="btn btn-primary" data-toggle="modal"  data-target="#exampleModal" date-id="<?=$moviment->getId();?>">Editar</a>
+                    <a href="" class="btn btn-primary bt-edit" data-toggle="modal"  data-target="#exampleModal" data-id="<?=$moviment->getId();?>">Editar</a>
                     <a href="<?=BASE;?>painel_movimentacao/delAction/<?=$moviment->getId();?>" class="btn btn-primary" onclick="return confirm('Deseja realemente excluir?');">Excluir</a>
                 </td>
             </tr>

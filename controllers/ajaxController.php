@@ -94,4 +94,20 @@ class ajaxController extends controller {
         ]);
     }
 
+    public function editMoviment() {
+        $id = 0;
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $content = file_get_contents("php://input");
+            $array = json_decode($content, true);
+            $id = $array['id'];   
+        }
+
+        $moviments = new MovementHandler();
+        $moviment = $moviments->getById($id);
+
+        $this->loadViewInPainel('moviment_edit',[
+            'moviment' => $moviment
+        ]);
+    }
+
 }

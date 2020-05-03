@@ -19,10 +19,8 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
     });
     
     async function loadMoviments(month, year) {
-        let myHeaders = new Headers();
         let myInit = { 
                 method: 'POST',
-                //headers: myHeaders,
                 mode: 'cors',
                 cache: 'default',
                 body: JSON.stringify({
@@ -32,15 +30,43 @@ $(document).ready(function(){	/* Executa a requisição quando o campo CEP perde
                 
             };
 
-        moviments = document.querySelector('#moviments');
+        let moviments = document.querySelector('#moviments');
         await fetch(`${BASE}ajax/listMoviment`, myInit)
             .then((r)=>r.text())
             .then((r)=>{
                 moviments.innerHTML = r; 
+                let modal = document.querySelectorAll('.bt-edit'), i;
+                for(i=0; i < modal.length; i++) {
+                    modal[i].addEventListener('click', function(){
+                        let id = this.getAttribute('data-id');
+                        editMoviment(id);
+                    });
+                }
+                
             })
             .catch(error => {
                 moviments.innerHTML = error
             });
+    }
+
+    function editMoviment(id) {
+        let myInit = { 
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify({
+                id,
+            })
+        };
+        fetch(`${BASE}ajax/editMoviment`, myInit)
+            .then((r)=>r.text())
+            .then((r)=>{
+                document.querySelector('.modal-body').innerHTML = r; 
+            })
+            .catch(error => {   
+                document.querySelector('.modal-body').innerHTML = error
+            });
+       
     }
 
     function updateDate(){

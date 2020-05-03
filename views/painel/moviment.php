@@ -74,7 +74,7 @@
         scale: 2,  // digits after point, 0 for integers
         signed: false,  // disallow negative
         thousandsSeparator: '',  // any single char
-        padFractionalZeros: true,  // if true, then pads zeros at end to the length of scale
+        padFractionalZeros: false,  // if true, then pads zeros at end to the length of scale
         normalizeZeros: false,  // appends or removes zeros at ends
         radix: ',',  // fractional delimiter
         mapToRadix: ['.']  // symbols to process as radix
