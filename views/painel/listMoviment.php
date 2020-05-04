@@ -74,7 +74,7 @@
                 <td><?=number_format($moviment->getPrice()-$moviment->getDesccount()+$moviment->getAddition(),2,',','');?></td>
                 <td>
                     <?php if(!empty($moviment->getPaymentDate())):?>
-                        <button class="btn btn-secondary">Pago</button>
+                        <button class="btn btn-secondary">Pago - <?=date('d/m/Y',strtotime($moviment->getPaymentDate()));?></button>
                     <?php else:?>
                         <a href="javascript:;" class="btn btn-primary bt-consolidar" data-toggle="modal"  data-target="#exampleModal" data-id="<?=$moviment->getId();?>">Consolidar</a>
                     <?php endif;?>
