@@ -57,7 +57,7 @@
                 <?php
                     if(!empty($moviment->getPaymentDate())){
                         $css = 'bg-success text-white';
-                    }elseif($moviment->getType()){
+                    }elseif($moviment->getType() == 'credit'){
                         $css = 'bg-primary text-white';
                     }else{
                         $css = 'bg-danger text-white';
