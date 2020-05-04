@@ -26,14 +26,16 @@
                 <label for="inputPassword2" class="sr-only">Vencimento</label>
                 <input type="tel" class="form-control data" id="due_date" placeholder="Vencimento" name="due_date" required>
             </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="inputPassword2" class="sr-only">Acréscimo</label>
-                <select name="type" id="">
+            <div class="form-group mb-2">
+                
+                <select name="type" id="" class="form-control">
                     <option value="credit">Crédito</option>
                     <option value="debit">Débito</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mb-2">OK</button>
+            <div class="form-group mx-sm-3 mb-2">
+                <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
+            </div>
         </form>
     </div>
 </div>
@@ -60,5 +62,6 @@
         </div>
     </div>
 </div>
+<!--Aqui é carregado a lista das Transações via requisição ajax-->
 <div id="moviments"></div>
 
