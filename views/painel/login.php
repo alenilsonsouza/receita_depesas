@@ -5,7 +5,7 @@
      
     </div>
     <div class="col-sm">
-        <img src="<?=BASE_IMAGES;?>final_marca_orbita.png" alt="" class="img-fluid" style="padding:10px">
+        <img src="<?=BASE_IMAGES;?>logo_aleevolucoes.png" alt="" class="img-fluid" style="padding:10px; width:100%">
         <h1 class="text-center">Acesso</h1>
         <p class="text-center"><?=$site->getName();?></p>
         <form method="POST" action="<?=BASE;?>login/signin">

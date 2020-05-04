@@ -4,7 +4,7 @@
         <div class="col">
             <a href="" style="margin:10px 0; display:inline-block">
                 <div class="text-center">
-                    <img src="<?=BASE_IMAGES;?>final_marca_orbita.png" class="img-fluid" alt="Logo">
+                    <img src="<?=BASE_IMAGES;?>logo_aleevolucoes.png" class="img-fluid" alt="Logo">
                 </div>
             </a>
             <p>Olá <?=$viewData['loggedUser']->getName();?></p>
