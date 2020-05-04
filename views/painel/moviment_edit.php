@@ -12,15 +12,15 @@
             </div>
             <div class="form-group mx-sm-2 mb-2">
                 <label for="inputPassword2" class="sr-only">Valor</label>
-                <input type="tel" class="form-control valor" id="price" placeholder="Valor" name="price" required value="<?=number_format($moviment->getPrice(),2,',','.');?>">
+                <input type="tel" class="form-control valor" id="price" placeholder="Valor" name="price" required value="<?=number_format($moviment->getPrice(),2,',','');?>">
             </div>
             <div class="form-group mb-2">
                 <label for="inputPassword2" class="sr-only">Desconto</label>
-                <input type="tel" class="form-control valor" id="desccount" placeholder="Desconto" name="desccount" value="<?=number_format($moviment->getDesccount(),2,",",'.');?>">
+                <input type="tel" class="form-control valor" id="desccount" placeholder="Desconto" name="desccount" value="<?=number_format($moviment->getDesccount(),2,",",'');?>">
             </div>
             <div class="form-group mx-sm-2 mb-2">
                 <label for="inputPassword2" class="sr-only">Acréscimo</label>
-                <input type="tel" class="form-control valor" id="addition" placeholder="Acréscimo" name="addition" value="<?=number_format($moviment->getAddition(),2,',','.');?>">
+                <input type="tel" class="form-control valor" id="addition" placeholder="Acréscimo" name="addition" value="<?=number_format($moviment->getAddition(),2,',','');?>">
             </div>
             <div class="form-group mb-2">
                 <label for="inputPassword2" class="sr-only">Vencimento</label>
