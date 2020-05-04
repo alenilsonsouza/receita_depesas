@@ -28,7 +28,7 @@ class MovementHandler extends model {
 
     public function getList($month, $year) {
         $array = [];
-        $sql = "SELECT * FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y ORDER BY due_date ASC";
+        $sql = "SELECT * FROM movement WHERE MONTH(due_date) = :m AND YEAR(due_date) = :y ORDER BY payment_date ASC, due_date ASC";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':m', $month);
         $sql->bindValue(':y', $year);
