@@ -134,8 +134,10 @@ class painel_movimentacaoController extends controller {
         $id = filter_input(INPUT_POST, 'id');
 
         if($payment_date && $id) {
+            $payment_date= explode('/',$payment_date);
+            $date = $payment_date[2].'-'.$payment_date[1].'-'.$payment_date[0]; 
             $newMoviment = new Movement();
-            $newMoviment->setPaymentDate($payment_date);
+            $newMoviment->setPaymentDate($date);
             $newMoviment->setId($id);
 
             $movimentHandler = new MovementHandler();
