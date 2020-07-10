@@ -55,8 +55,10 @@
             <?php $n = 1;?>
             <?php foreach($moviments as $moviment):?>
                 <?php
-                    if(!empty($moviment->getPaymentDate())){
+                    if(!empty($moviment->getPaymentDate()) && $moviment->getType() == 'credit'){
                         $css = 'bg-success text-white';
+                    }elseif(!empty($moviment->getPaymentDate()) && $moviment->getType() == 'debit'){
+                        $css = 'bg-warning';
                     }elseif($moviment->getType() == 'credit'){
                         $css = 'bg-primary text-white';
                     }else{
